@@ -78,7 +78,23 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose)
+plugins=(\
+    git \
+    docker \
+    docker-compose \
+    kubectl \
+    colored-man-pages \
+    dotenv \
+    git-auto-fetch \
+    httpie \
+    helm \
+    minikube \
+    npm \
+    pip \
+    poetry \
+    pyenv \
+    tmux \
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -117,3 +133,5 @@ prepend_path() {
 
 prepend_path "$HOME/bin"
 prepend_path "$HOME/.local/bin"
+
+alias work='cd ~/.workspace'

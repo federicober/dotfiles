@@ -1,0 +1,6 @@
+.oh-my-zsh/cache/**
+**/*.zwc
+
+.pyenv/shims
+.pyenv/version
+.pyenv/versions
