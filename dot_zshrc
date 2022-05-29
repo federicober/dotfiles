@@ -121,6 +121,13 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+
+# Generic
+alias work='cd ~/workspace'
+
+# Python
+alias venv='[ -d venv ] || virtualenv venv ; source venv/bin/activate'
+
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
@@ -134,4 +141,3 @@ prepend_path() {
 prepend_path "$HOME/bin"
 prepend_path "$HOME/.local/bin"
 
-alias work='cd ~/workspace'
