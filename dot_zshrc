@@ -135,12 +135,10 @@ alias work='cd ~/workspace'
 # Python
 alias venv='[ -d venv ] || virtualenv venv ; source venv/bin/activate'
 
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="chezmoi edit ~/.zshrc"
+alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+# Path
 prepend_path() {
     export PATH="$1:$PATH"
 }
@@ -150,3 +148,9 @@ prepend_path "$HOME/.local/bin"
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
+# Env vars
+export PYTHONTRACEMALLOC=1
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
