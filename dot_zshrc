@@ -101,7 +101,6 @@ add_plugin git
 add_plugin pip
 add_plugin npm
 add_plugin helm
-add_plugin pyenv
 
 source $ZSH/oh-my-zsh.sh
 
@@ -147,6 +146,13 @@ prepend_path "$HOME/bin"
 prepend_path "$HOME/.local/bin"
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# PYENV
+export PYENV_ROOT="$HOME/.pyenv"
+if [[ -d "$PYENV_ROOT" ]] ; then
+    prepend_path "$PYENV_ROOT"/bin
+    eval "$(pyenv init -)"
 fi
 
 # Env vars
