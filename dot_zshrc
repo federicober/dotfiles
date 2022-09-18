@@ -73,6 +73,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+prepend_path() {
+    export PATH="$1:$PATH"
+}
+
+prepend_path "$HOME/bin"
+prepend_path "$HOME/.local/bin"
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -101,6 +111,20 @@ add_plugin git
 add_plugin pip
 add_plugin npm
 add_plugin helm
+# PYENV
+export PYENV_ROOT="$HOME/.pyenv"
+if [[ -d "$PYENV_ROOT" ]] ; then
+    prepend_path "$PYENV_ROOT"/bin
+    eval "$(pyenv init -)"
+    plugins+=(pyenv) 
+fi
+# NVM
+export NVM_DIR="$HOME/.nvm"
+if [[ -d "$NVM_DIR" ]] ; then
+    . "$NVM_DIR/nvm.sh"
+    plugins+=(nvm)
+    if [[ -f "$HOME/.nvmrc" ]] ; then nvm use > /dev/null ; fi 
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -132,28 +156,11 @@ fi
 alias work='cd ~/workspace'
 
 # Python
-alias venv='[ -d venv ] || virtualenv venv ; source venv/bin/activate'
-
+VIRTUALENV_NAME=".venv"
+alias venv='[ -d "${VIRTUALENV_NAME}" ] || virtualenv --prompt . "${VIRTUALENV_NAME}" ; source "${VIRTUALENV_NAME}"/bin/activate'
+alias rmvenv='rm -rf "${VIRTUALENV_NAME}"'
 alias zshconfig="chezmoi edit ~/.zshrc"
 alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
-
-# Path
-prepend_path() {
-    export PATH="$1:$PATH"
-}
-
-prepend_path "$HOME/bin"
-prepend_path "$HOME/.local/bin"
-if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
-# PYENV
-export PYENV_ROOT="$HOME/.pyenv"
-if [[ -d "$PYENV_ROOT" ]] ; then
-    prepend_path "$PYENV_ROOT"/bin
-    eval "$(pyenv init -)"
-fi
 
 # Env vars
 export PYTHONTRACEMALLOC=1

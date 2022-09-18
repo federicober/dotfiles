@@ -12,3 +12,8 @@
     type = "git-repo"
     url = "https://github.com/pyenv/pyenv.git"
     refreshPeriod = "168h"
+
+[".nvm"]
+    type = "git-repo"
+    url = "https://github.com/nvm-sh/nvm.git"
+    refreshPeriod = "168h"
