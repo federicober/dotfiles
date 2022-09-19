@@ -8,6 +8,11 @@
     url = "https://github.com/romkatv/powerlevel10k.git"
     refreshPeriod = "168h"
 
+[".shrc.d/git-prompt.bash"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+    refreshPeriod = "168h"
+
 {{ with .install.pyenv }}
 [".pyenv"]
     type = "git-repo"
