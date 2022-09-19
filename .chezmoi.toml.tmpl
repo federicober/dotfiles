@@ -1,5 +1,10 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $nvm := promptBoolOnce .install "nvm" "Install NVM" -}}
+{{- $pyenv := promptBoolOnce .install "pyenv" "Install Pyenv" -}}
 
 [data]
 email = {{ $email | quote }}
 
+[data.install]
+nvm = {{ $nvm }}
+pyenv = {{ $pyenv }}

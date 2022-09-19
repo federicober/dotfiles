@@ -8,12 +8,16 @@
     url = "https://github.com/romkatv/powerlevel10k.git"
     refreshPeriod = "168h"
 
+{{ with .install.pyenv }}
 [".pyenv"]
     type = "git-repo"
     url = "https://github.com/pyenv/pyenv.git"
     refreshPeriod = "168h"
+{{ end }}
 
+{{ with .install.nvm }}
 [".nvm"]
     type = "git-repo"
     url = "https://github.com/nvm-sh/nvm.git"
     refreshPeriod = "168h"
+{{ end }}
