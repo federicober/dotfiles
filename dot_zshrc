@@ -73,19 +73,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-prepend_path() {
-    export PATH="$1:$PATH"
-}
-append_path() {
-    export PATH="$PATH:$1"
-}
-
-prepend_path "$HOME/bin"
-prepend_path "$HOME/.local/bin"
-
-if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+for file in $(find ~/.shrc.d -name '*.sh.pre' -type f) ; do 
+  source "$file" ;
+done
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -117,15 +107,13 @@ add_plugin npm
 add_plugin helm
 
 # PYENV
-export PYENV_ROOT="$HOME/.pyenv"
 if [[ -d "$PYENV_ROOT" ]] ; then
     prepend_path "$PYENV_ROOT"/bin
-    eval "$(pyenv init -)"
     plugins+=(pyenv) 
+    eval "$(pyenv init -)"
 fi
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
 if [[ -d "$NVM_DIR" ]] ; then
     . "$NVM_DIR/nvm.sh"
     plugins+=(nvm)
@@ -133,58 +121,6 @@ if [[ -d "$NVM_DIR" ]] ; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.utf8"
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-# Generic
-alias zshconfig="chezmoi edit ~/.zshrc"
-alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
-
-alias work='cd ~/workspace'
-
-# Python
-VENV_NAME=.venv
-activate() { source "$VENV_NAME"/bin/activate }
-venv() {
-    if [ -n "${1-}" ] ; then
-        if [ ! -d "${1}" ] ; then
-            echo "${1} is not a directory" >&2
-            return 1
-        fi
-        cd "${1}"
-        shift
-    fi
-    if [ ! -d env ] ; then 
-        virtualenv --prompt "$(basename $PWD)-env" "$VENV_NAME"
-        source "$VENV_NAME"/bin/activate
-    fi
-}
-rmvenv() { rm -rf "$VENV_NAME" }
-
-# Allow debugging of python coroutines
-# Do not set in prod
-export PYTHONTRACEMALLOC=1
 
 for file in $(find ~/.shrc.d -name '*.sh' -type f) ; do 
   source "$file" ;

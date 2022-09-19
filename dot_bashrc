@@ -1,0 +1,22 @@
+for file in $(find ~/.shrc.d -name '*.sh.pre' -type f) ; do 
+  source "$file" ;
+done
+
+# PYENV
+if [[ -d "$PYENV_ROOT" ]] ; then
+    prepend_path "$PYENV_ROOT"/bin
+    eval "$(pyenv init -)"
+fi
+
+# NVM
+if [[ -d "$NVM_DIR" ]] ; then
+    . "$NVM_DIR/nvm.sh"
+    if [[ -f "$HOME/.nvmrc" ]] ; then nvm use > /dev/null ; fi 
+fi
+
+PROMPT_COMMAND='PS1="\[\033[35m\]\t\[\033[m\] - \[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\n\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\$ \[\033[m\]"'
+
+for file in $(find ~/.shrc.d -name '*.sh' -type f) ; do 
+  source "$file" ;
+done
+

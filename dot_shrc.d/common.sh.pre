@@ -1,0 +1,17 @@
+prepend_path() {
+    export PATH="$1:$PATH"
+}
+append_path() {
+    export PATH="$PATH:$1"
+}
+
+prepend_path "$HOME/bin"
+prepend_path "$HOME/.local/bin"
+
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+export PYENV_ROOT="$HOME/.pyenv"
+export NVM_DIR="$HOME/.nvm"
+
