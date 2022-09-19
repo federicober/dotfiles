@@ -76,9 +76,13 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 prepend_path() {
     export PATH="$1:$PATH"
 }
+append_path() {
+    export PATH="$PATH:$1"
+}
 
 prepend_path "$HOME/bin"
 prepend_path "$HOME/.local/bin"
+
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
@@ -111,6 +115,7 @@ add_plugin git
 add_plugin pip
 add_plugin npm
 add_plugin helm
+
 # PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 if [[ -d "$PYENV_ROOT" ]] ; then
@@ -118,6 +123,7 @@ if [[ -d "$PYENV_ROOT" ]] ; then
     eval "$(pyenv init -)"
     plugins+=(pyenv) 
 fi
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 if [[ -d "$NVM_DIR" ]] ; then
@@ -133,7 +139,8 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.utf8"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -149,21 +156,39 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
 
 # Generic
-alias work='cd ~/workspace'
-
-# Python
-VIRTUALENV_NAME=".venv"
-alias venv='[ -d "${VIRTUALENV_NAME}" ] || virtualenv --prompt . "${VIRTUALENV_NAME}" ; source "${VIRTUALENV_NAME}"/bin/activate'
-alias rmvenv='rm -rf "${VIRTUALENV_NAME}"'
 alias zshconfig="chezmoi edit ~/.zshrc"
 alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
 
-# Env vars
+alias work='cd ~/workspace'
+
+# Python
+VENV_NAME=.venv
+activate() { source "$VENV_NAME"/bin/activate }
+venv() {
+    if [ -n "${1-}" ] ; then
+        if [ ! -d "${1}" ] ; then
+            echo "${1} is not a directory" >&2
+            return 1
+        fi
+        cd "${1}"
+        shift
+    fi
+    if [ ! -d env ] ; then 
+        virtualenv --prompt "$(basename $PWD)-env" "$VENV_NAME"
+        source "$VENV_NAME"/bin/activate
+    fi
+}
+rmvenv() { rm -rf "$VENV_NAME" }
+
+# Allow debugging of python coroutines
+# Do not set in prod
 export PYTHONTRACEMALLOC=1
+
+for file in $(find ~/.shrc.d -name '*.sh' -type f) ; do 
+  source "$file" ;
+done
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
