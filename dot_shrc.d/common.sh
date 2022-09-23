@@ -41,10 +41,10 @@ venv() {
         cd "${1}"
         shift
     fi
-    if [ ! -d env ] ; then 
+    if [ ! -d "$VENV_NAME" ] ; then 
         virtualenv --prompt "$(basename $PWD)-env" "$VENV_NAME"
-        source "$VENV_NAME"/bin/activate
     fi
+    source "$VENV_NAME"/bin/activate
 }
 rmvenv() {
   rm -rf "$VENV_NAME"
