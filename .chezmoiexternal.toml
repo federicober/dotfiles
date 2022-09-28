@@ -8,6 +8,16 @@
     url = "https://github.com/romkatv/powerlevel10k.git"
     refreshPeriod = "168h"
 
+[".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+    type = "git-repo"
+    url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+    type = "git-repo"
+    url = "https://github.com/zsh-users/zsh-autosuggestions"
+    refreshPeriod = "168h"
+
 [".shrc.d/git-prompt.bash"]
     type = "file"
     url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"

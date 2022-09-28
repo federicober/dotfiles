@@ -86,6 +86,7 @@ plugins=(\
     colored-man-pages \
     dotenv \
     git-auto-fetch \
+    zsh-autosuggestions \
 )
 
 add_plugin() {
@@ -119,6 +120,9 @@ if [[ -d "$NVM_DIR" ]] ; then
     plugins+=(nvm)
     if [[ -f "$HOME/.nvmrc" ]] ; then nvm use > /dev/null ; fi 
 fi
+
+# Note that zsh-syntax-highlighting must be the last plugin sourced.
+plugins+=(zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
