@@ -28,6 +28,7 @@ alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
 alias work='cd ~/workspace'
 
 # Python
+
 VENV_NAME=".venv"
 activate() { 
   source "$VENV_NAME"/bin/activate
@@ -53,3 +54,6 @@ rmvenv() {
 # Allow debugging of python coroutines
 # Do not set in prod
 export PYTHONTRACEMALLOC=1
+
+## Completions
+eval "$(register-python-argcomplete pipx)"
