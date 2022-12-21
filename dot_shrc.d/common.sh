@@ -25,7 +25,8 @@ fi
 alias zshconfig="chezmoi edit ~/.zshrc"
 alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
 
-alias work='cd ~/workspace'
+MY_WORKSPACE=$HOME/workspace
+alias work='cd "$MY_WORKSPACE"'
 
 # Python
 
@@ -49,6 +50,12 @@ venv() {
 }
 rmvenv() {
   rm -rf "$VENV_NAME"
+}
+
+notebook() {
+  mkdir -p "$MY_WORKSPACE/notebooks"
+  cd "$MY_WORKSPACE/notebooks"
+  jupyter lab
 }
 
 # Allow debugging of python coroutines
