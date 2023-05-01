@@ -6,11 +6,13 @@
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.utf8"
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
+if nvim --version > /dev/null
+  then
+    EDITOR=nvim
+    alias vim=nvim
+    alias vi=nvim
+  else
+    EDITOR=vim
 fi
 
 # Compilation flags
@@ -64,3 +66,6 @@ export PYTHONTRACEMALLOC=1
 
 ## Completions
 eval "$(register-python-argcomplete pipx)"
+
+# Rust
+append_path "$HOME/.cargo/bin"
