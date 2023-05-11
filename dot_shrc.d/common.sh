@@ -8,11 +8,13 @@ export LC_ALL="en_US.utf8"
 
 if nvim --version > /dev/null
   then
-    EDITOR=nvim
+    export EDITOR=nvim
+    export VISUAL=nvim
     alias vim=nvim
     alias vi=nvim
   else
-    EDITOR=vim
+    export EDITOR=vim
+    export VISUAL=vim
 fi
 
 # Compilation flags
