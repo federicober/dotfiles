@@ -6,7 +6,7 @@
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.utf8"
 
-if nvim --version > /dev/null
+if nvim --version > /dev/null 2>&1
   then
     export EDITOR=nvim
     export VISUAL=nvim
