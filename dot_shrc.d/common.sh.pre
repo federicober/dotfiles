@@ -5,13 +5,18 @@ append_path() {
     export PATH="$PATH:$1"
 }
 
+# PATH will be needed fot the rest of the config
 prepend_path "$HOME/bin"
 prepend_path "$HOME/.local/bin"
 
+# Put bre in path before rest of config
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] ; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# Needed by zsh plugins
 export PYENV_ROOT="$HOME/.pyenv"
 export NVM_DIR="$HOME/.nvm"
 
+# make sure no config accidentally installs anything out of place
+export PIP_REQUIRE_VENV=1
