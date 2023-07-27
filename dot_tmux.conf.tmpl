@@ -32,4 +32,4 @@ bind-key = select-layout even-horizontal
 # 'R' reloads the config
 bind-key R source-file "${HOME}/etc/tmux/tmux.conf" \; display-message "${HOME}/etc/tmux/tmux.conf loaded"
 
-set -g default-shell /bin/zsh
+set -g default-shell {{ .shell }}

@@ -41,3 +41,10 @@
     url = "https://github.com/nvm-sh/nvm.git"
     refreshPeriod = "168h"
 {{ end }}
+
+{{ range $i := .external }}
+["{{$i.directory}}"]
+    type = "git-repo"
+    url = "{{$i.remote}}"
+    refreshPeriod = "1h"
+{{end}}

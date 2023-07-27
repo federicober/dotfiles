@@ -19,4 +19,17 @@ For more info, check the `.chezmoiexternal.toml` file.
 1. zsh-autosuggestions
 1. pyenv
 1. npm
-1. git-prompt 
+1. git-prompt
+
+### Additional external files
+
+Additional external files can be added by adding the following section in your `~/.config/chezmoi/chezmoi.toml`:
+
+```toml
+[[data.external]]
+directory=".shrc.d/extra"
+remote="git@github.com/federicober/more_dot_files.git"
+```
+
+Note that you can add this section several times.
+

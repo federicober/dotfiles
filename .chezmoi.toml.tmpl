@@ -1,9 +1,14 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+
+{{- $prefered_shell := promptStringOnce . "prefered_shell" "Prefered Shell" "/bin/zsh" -}}
+
 {{- $nvm := promptBoolOnce .install "nvm" "Install NVM" -}}
 {{- $pyenv := promptBoolOnce .install "pyenv" "Install Pyenv" -}}
 
 [data]
 email = {{ $email | quote }}
+shell = {{ $prefered_shell | quote }}
+external = []
 
 [data.install]
 nvm = {{ $nvm }}
