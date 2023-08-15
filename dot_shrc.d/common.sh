@@ -31,6 +31,9 @@ alias ohmyzsh="chezmoi edit ~/.oh-my-zsh"
 MY_WORKSPACE=$HOME/workspace
 alias work='cd "$MY_WORKSPACE"'
 
+MY_PLAYGROUND=$HOME/playground
+alias play='cd $MY_PLAYGROUND'
+
 # Python
 
 VENV_NAME=".venv"
