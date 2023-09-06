@@ -68,8 +68,15 @@ notebook() {
 # Do not set in prod
 export PYTHONTRACEMALLOC=1
 
+# Config file for Python REPL
+export PYTHONSTARTUP=~/.pythonrc
+
 ## Completions
-eval "$(register-python-argcomplete pipx)"
+if register-python-argcomplete --version > /dev/null 2>&1 ; then
+  if pipx --version > /dev/null 2>&1 ; then
+    eval "$(register-python-argcomplete pipx)"
+  fi
+fi
 
 # Rust
 append_path "$HOME/.cargo/bin"
