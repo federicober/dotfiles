@@ -66,8 +66,6 @@ for file in $(find ~/.shrc.d -name '*.sh.pre' -type f) ; do
   source "$file" ;
 done
 
-eval "$(oh-my-posh init zsh --config ~/.config/omp/config.toml)"
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -80,7 +78,7 @@ plugins=(\
 )
 
 add_plugin() {
-    if which "${1}" > /dev/null 2>&1 ; then plugins+=("${1}") ; fi
+    if command "${1}" > /dev/null 2>&1 ; then plugins+=("${1}") ; fi
 }
 
 add_plugin terraform
@@ -111,7 +109,15 @@ fi
 # Note that zsh-syntax-highlighting must be the last plugin sourced.
 plugins+=(zsh-syntax-highlighting)
 
+# Enable Oh My Zsh after selecting all the plugins
 source $ZSH/oh-my-zsh.sh
+
+# Oh My Posh must be enabled after oh-my-zsh to ensure correct working
+if command oh-my-posh > /dev/null 2>&1 ; then
+    eval "$(oh-my-posh init zsh --config ~/.config/omp/config.toml)"
+else
+    echo "oh-my-posh not found"
+fi
 
 for file in $(find ~/.shrc.d -name '*.sh' -type f) ; do 
   source "$file" ;
