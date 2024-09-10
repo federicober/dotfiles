@@ -78,7 +78,7 @@ plugins=(\
 )
 
 add_plugin() {
-    if command "${1}" > /dev/null 2>&1 ; then plugins+=("${1}") ; fi
+    if which "${1}" > /dev/null 2>&1 ; then plugins+=("${1}") ; fi
 }
 
 add_plugin terraform
