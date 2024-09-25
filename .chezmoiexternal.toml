@@ -23,21 +23,26 @@
     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     refreshPeriod = "168h"
 
-{{ with .install.pyenv }}
+[".vim/autoload/plug.vim "]
+    type = "file"
+    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    refreshPeriod = "168h"
+
+{{ with .install_pyenv -}}
 [".pyenv"]
     type = "git-repo"
     url = "https://github.com/pyenv/pyenv.git"
     refreshPeriod = "168h"
-{{ end }}
+{{- end }}
 
-{{ with .install.nvm }}
+{{ with .install_nvm -}}
 [".nvm"]
     type = "git-repo"
     url = "https://github.com/nvm-sh/nvm.git"
     refreshPeriod = "168h"
-{{ end }}
+{{- end }}
 
-{{ range $i := .external }}
+{{ range $i := (index . "external") }}
 ["{{$i.directory}}"]
     type = "git-repo"
     url = "{{$i.remote}}"
