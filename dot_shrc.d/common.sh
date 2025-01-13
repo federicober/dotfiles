@@ -50,7 +50,7 @@ venv() {
         shift
     fi
     if [ ! -d "$VENV_NAME" ] ; then 
-        virtualenv --prompt "$(basename $PWD)-env" "$VENV_NAME"
+        uv venv --prompt "$(basename $PWD)-env" "$VENV_NAME"
     fi
     source "$VENV_NAME"/bin/activate
 }
